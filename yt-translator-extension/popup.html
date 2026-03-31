@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YT Live Translator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0f11;
+      --bg2: #16181c;
+      --bg3: #1e2026;
+      --border: #2a2d35;
+      --accent: #ff4a4a;
+      --accent2: #ff7c4a;
+      --text: #e8e9ec;
+      --muted: #6b6f7a;
+      --success: #3dd68c;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    body {
+      width: 340px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.5;
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+
+    .logo { display: flex; align-items: center; gap: 8px; }
+
+    .logo-icon {
+      width: 26px; height: 26px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-icon svg { display: block; }
+    .logo-text { font-size: 13px; font-weight: 500; letter-spacing: 0.02em; }
+    .logo-sub { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.05em; }
+
+    /* ── Toggle ── */
+    .toggle-row { display: flex; align-items: center; gap: 8px; }
+    .toggle-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+
+    .switch { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+    .switch-track {
+      position: absolute; inset: 0;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 11px; transition: background 0.2s, border-color 0.2s; cursor: pointer;
+    }
+
+    .switch-thumb {
+      position: absolute; top: 3px; left: 3px;
+      width: 14px; height: 14px;
+      background: var(--muted); border-radius: 50%;
+      transition: transform 0.2s, background 0.2s; pointer-events: none;
+    }
+
+    .switch input:checked ~ .switch-track { background: var(--accent); border-color: var(--accent); }
+    .switch input:checked ~ .switch-thumb { transform: translateX(18px); background: #fff; }
+
+    /* ── Body ── */
+    .body { padding: 14px 18px; display: flex; flex-direction: column; gap: 14px; }
+
+    /* ── Status bar ── */
+    .status-bar {
+      display: flex; align-items: center; gap: 7px;
+      padding: 8px 12px;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+    }
+
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--muted); flex-shrink: 0; transition: background 0.3s;
+    }
+
+    .status-dot.active {
+      background: var(--success);
+      box-shadow: 0 0 6px var(--success);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    /* ── Section ── */
+    .section { display: flex; flex-direction: column; gap: 10px; }
+
+    .section-title {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); padding-bottom: 4px; border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Field ── */
+    .field { display: flex; flex-direction: column; gap: 5px; }
+
+    .field-label {
+      font-size: 12px; font-weight: 500; color: var(--text);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .field-value { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+
+    /* ── Select ── */
+    select {
+      width: 100%; padding: 7px 10px;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 7px;
+      color: var(--text); font-family: var(--sans); font-size: 12px;
+      cursor: pointer; outline: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6f7a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+      padding-right: 30px; transition: border-color 0.15s;
+    }
+
+    select:focus { border-color: var(--accent); }
+
+    /* ── Slider ── */
+    .slider-row { display: flex; align-items: center; gap: 10px; }
+
+    input[type="range"] {
+      flex: 1; height: 4px; -webkit-appearance: none; appearance: none;
+      background: var(--bg3); border-radius: 2px; outline: none; cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 14px; height: 14px;
+      border-radius: 50%; background: var(--accent);
+      cursor: pointer; transition: transform 0.15s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+    /* ── Check row ── */
+    .check-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+      cursor: pointer; transition: border-color 0.15s;
+    }
+
+    .check-row:hover { border-color: var(--accent); }
+    .check-row-label { font-size: 12px; font-weight: 500; }
+    .check-row-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 10px 18px 14px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+
+    .queue-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 10px; color: var(--muted);
+    }
+
+    .queue-count {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 4px; padding: 2px 6px;
+      font-size: 11px; color: var(--text);
+      min-width: 22px; text-align: center;
+    }
+
+    .free-badge {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--success); letter-spacing: 0.05em;
+    }
+
+    /* Disabled overlay */
+    .body.disabled .section { opacity: 0.45; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="white" stroke-width="1.5"/>
+        <path d="M5.5 5L9 7L5.5 9V5Z" fill="white"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-text">YT Translator</div>
+      <div class="logo-sub">LIVE CAPTION READER</div>
+    </div>
+  </div>
+  <div class="toggle-row">
+    <span class="toggle-label" id="toggle-label">OFF</span>
+    <label class="switch">
+      <input type="checkbox" id="main-toggle">
+      <div class="switch-track"></div>
+      <div class="switch-thumb"></div>
+    </label>
+  </div>
+</div>
+
+<div class="body" id="main-body">
+
+  <div class="status-bar">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">Disabled — toggle on to start</span>
+  </div>
+
+  <!-- Translation -->
+  <div class="section">
+    <div class="section-title">Translation</div>
+    <div class="field">
+      <div class="field-label">Target language</div>
+      <select id="target-lang">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="hi">Hindi</option>
+        <option value="zh">Chinese (Simplified)</option>
+        <option value="ja">Japanese</option>
+        <option value="ko">Korean</option>
+        <option value="ar">Arabic</option>
+        <option value="pt">Portuguese</option>
+        <option value="ru">Russian</option>
+        <option value="it">Italian</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Voice -->
+  <div class="section">
+    <div class="section-title">Voice</div>
+
+    <div class="field">
+      <div class="field-label">Voice</div>
+      <select id="voice-select">
+        <option value="">— auto (match language) —</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <div class="field-label">
+        <span>Speech rate</span>
+        <span class="field-value" id="rate-val">1.0×</span>
+      </div>
+      <div class="slider-row">
+        <span style="font-size:11px;color:var(--muted)">0.5×</span>
+        <input type="range" id="voice-rate" min="0.5" max="2" step="0.1" value="1.0">
+        <span style="font-size:11px;color:var(--muted)">2×</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">
+        <span>Volume</span>
+        <span class="field-value" id="vol-val">100%</span>
+      </div>
+      <div class="slider-row">
+        <span style="font-size:11px;color:var(--muted)">0%</span>
+        <input type="range" id="voice-volume" min="0" max="1" step="0.05" value="1">
+        <span style="font-size:11px;color:var(--muted)">100%</span>
+      </div>
+    </div>
+
+    <label class="check-row" for="mute-original">
+      <div>
+        <div class="check-row-label">Mute original audio</div>
+        <div class="check-row-sub">Silence the video while translation plays</div>
+      </div>
+      <label class="switch" style="flex-shrink:0">
+        <input type="checkbox" id="mute-original">
+        <div class="switch-track"></div>
+        <div class="switch-thumb"></div>
+      </label>
+    </label>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="queue-badge">
+    QUEUE <span class="queue-count" id="queue-count">0</span>
+  </div>
+  <span class="free-badge">NO API KEY NEEDED</span>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
