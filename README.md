@@ -22,3 +22,6 @@ Most Youtube translation extensions rely on either a LLM (AI) or some sort of pa
 ## Extra Notes
 - This extension is in beta, so it often misses cues and thus may not say every word.
 - This extension may get ratelimited in certain scenarios, though I don't see that happening.
+
+## License
+- This softwareis under the [GNU Affero General Public License (v3.0)](https://github.com/Vanish-Coder/live-translate-youtube-extension/blob/main/LICENSE)
