@@ -2,7 +2,7 @@
 In a nutshell, this extension reads YouTube captions (doesn't matter the language), translates them (via Google Translate), and speaks the translation out loud using the browser's default voice.
 
 ## Installation 
-- Install a [release](https://github.com/Vanish-Coder/live-translate-YouTube-extension/releases) (the latest one usually gives the best results).
+- Download a [release](https://github.com/Vanish-Coder/live-translate-YouTube-extension/releases) (the latest one usually gives the best results) and unzip/open the compressed file you get.
 - Go to chrome://extensions/.
 - Enable Developer mode (at the top right).
 - Press on the "Load unpacked" button (at the top left).
