@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "YT Live Translator",
+  "name": "Youtube Live Translator",
   "version": "0.1.0",
   "description": "Translates YouTube captions in real-time and reads them aloud. No API key needed.",
   "permissions": [
