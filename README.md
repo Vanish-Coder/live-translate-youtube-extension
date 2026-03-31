@@ -18,4 +18,4 @@ In a nutshell, this extension reads Youtube captions (doesn't matter the languag
 
 ## Extra Notes
 - This extension is in beta, so it often misses cues and thus may not say every word.
-- This extension may get ratelimited if abused as the creator ([@Vanish-Coder](https://github.com/Vanish-Coder)) doesn't have control over the translation process (uses Google Translate API).
+- This extension may get ratelimited in certain scenarios, though I don't see that happening.
