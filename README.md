@@ -16,9 +16,9 @@ In a nutshell, this extension reads YouTube captions (doesn't matter the languag
 - Select the target language (the language you want the video translated in).
 - **Side Notes**: You can pick a voice (in beta), adjust volume and speech rate, and mute the original audio.
 
-## Updating the Software
+## Updating
 - Delete your current version you have by going to chrome://extensions/ and pressing on the "Delete" button for this software.
-- Follow the [installation instructions](https://github.com/Vanish-Coder/live-translate-youtube-extension#installation) (with a newer release).
+- Follow the [installation instructions](https://github.com/Vanish-Coder/live-translate-youtube-extension#installation) (with the release you are switching to).
 - You're all done!
 
 ## What makes this different from other translator extensions/autodub?
