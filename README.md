@@ -28,6 +28,8 @@ Most YouTube translation extensions rely on either a LLM (AI) or some sort of pa
 - If you use Linux, tar.gz is probably the best choice.  
 - If you use Windows, zip is probably the best choice.
 - If you use MacOS, either file type works.
+- If you use ChromeOS, zip usually works better.
+- If you use FreeBSD, tar.gz is the better choice.
 
 ## Features
 - Real time language translation (derived from captions).
