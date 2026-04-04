@@ -4,6 +4,8 @@ In a nutshell, this extension reads YouTube captions (doesn't matter the languag
 ## Appearance
 <img width="340" height="530" alt="Screenshot 2026-04-04 at 12 57 20 PM" src="https://github.com/user-attachments/assets/35f07a74-ceff-4c7e-93ee-d086bb89bf7b" />
 
+- **Note:** Appearance may vary depending on the version used.
+
 ## Installation 
 - Download a [release](https://github.com/Vanish-Coder/live-translate-YouTube-extension/releases) (the latest one usually gives the best results) and unzip/open the compressed file you get.
 - Go to chrome://extensions/.
