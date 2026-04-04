@@ -25,11 +25,11 @@ In a nutshell, this extension reads YouTube captions (doesn't matter the languag
 Most YouTube translation extensions rely on either a LLM (AI) or some sort of paid API, which causes higher latency and limited usage at free tiers. This extension approaches this whole idea in a different way, allowing for a zero-cost solution which is carried on to the users. Also, as of now, YouTube autodub isn't available for around 99% of YouTube videos (data drawn from [here](https://www.google.com/search?q=how+many+YouTube+videos+have+autodub&rlz=1C5OZZY_enUS1175US1175&oq=how+many+YouTube+videos+have+autodub&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDUzMjFqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8&mstk=AUtExfCw92zok3Q-Hi3g-vBeVZFO5Dg0zR_-WhjpVKfWfXwbEUp5cHg3o29HQItt1K39yQoRSpSe_hyVIaTJNS1tCnBBWIksWNMIWX1hXANm4jb3Qri5m-PHguIUHMjb9qnQoTBM77j79eDEj0X5UaC0EsuYkiKPf0kebm0eEMa1_E2HWafMopsPxi52fBLNN68a5dQmdnOfyb_3RLfCtjCWkMG1VJE_gQ&csuir=1&udm=50&aioh=3#aof=1) and [here](https://share.google/aimode/Mrv8u8KZ7MIiJU42y)).
 
 ## What file type should I install (tar.gz or zip)?
-- If you use **Linux**, **tar.gz** is probably the best choice.  
-- If you use **Windows**, **zip** is probably the best choice.
-- If you use **MacOS**, **either file type** works, though zips are often more convenient.
-- If you use **ChromeOS**, **zip** usually works better.
-- If you use **FreeBSD**, **tar.gz** is the better choice.
+- If you use **Linux**, _tar.gz_ is probably the best choice.  
+- If you use **Windows**, _zip_ is probably the best choice.
+- If you use **MacOS**, _either file type_ works, though zips are often more convenient.
+- If you use **ChromeOS**, _zip_ usually works better.
+- If you use **FreeBSD**, _tar.gz_ is the better choice.
 
 ## Features
 - Real time language translation (derived from captions).
