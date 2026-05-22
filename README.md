@@ -39,14 +39,14 @@ Most YouTube translation extensions rely on either a LLM (AI) or some sort of pa
 ## Features
 - Real time language translation (derived from captions).
 - Multi lanuage support.
-- Works without pesky API keys.
+- Works without API keys.
 - Repeat Filtering - Avoids too many repeats by constantly checking certain cues and pushing late words of the stack.
 - Able to mute original audio directly on the extension.
 - Adjustable voice controls.
 - Layout Aware - Automatically switches input sources based on layout configurations (detects DOM changes).
 
 ## Extra Notes
-- This extension is in beta, so it often misses cues and thus may not say every word.
+- This extension is in beta, so it often misses cues and thus may not say every word, in fact it can miss up to 40-50% of cues as of now.
 - This extension may get ratelimited in certain scenarios, though I don't see that happening.
 
 ## License
